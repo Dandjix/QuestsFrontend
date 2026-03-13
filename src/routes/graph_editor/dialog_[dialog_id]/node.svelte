@@ -1,20 +1,43 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 	const { node } = $props();
+
+	let x = $state(node.x);
+    let y = $state(node.y);
+
+	function moveDialog(event: MouseEvent) {
+		x += event.movementX;
+		y += event.movementY;
+		console.log("set node x and y to : ",node.x,node.y)
+	}
+
+	function startDragging() {
+		window.addEventListener('mousemove', moveDialog);
+		window.addEventListener('mouseup', stopDragging);
+	}
+	function stopDragging() {
+		window.removeEventListener('mousemove', moveDialog);
+		window.removeEventListener('mouseup', stopDragging);
+	}
+
+	function edit() {
+		node.x = 0;
+		node.y = 0;
+	}
 </script>
 
-<div class="frame" style="left: calc(50% + {node.x}px); top: calc(50% + {node.y}px);">
-	<button class="move-handle">
+<div class="frame" style="left: calc(50% + {x}px); top: calc(50% + {y}px);">
+	<button class="move-handle" onmousedown={startDragging} onmouseup={stopDragging}>
 		<Icon icon="si:move-duotone" color="text" width="30" height="30" />
 	</button>
-	
+
 	<p class="status"><bold>NPC line</bold></p>
 	<p class="text">
 		{node.text}
 	</p>
 	<span class="actions">
 		<button class="icon-button">
-			<Icon icon="mdi:pen" color="yellow" width="50" height="50" />
+			<Icon icon="mdi:pen" color="yellow" width="50" height="50" onclick={edit} />
 		</button>
 		<button class="icon-button">
 			<Icon icon="mdi:trash" color="red" width="50" height="50" />
@@ -23,6 +46,19 @@
 </div>
 
 <style>
+	.frame {
+		background-color: #667;
+		border-radius: 2rem;
+		padding: 1rem;
+		border: 2mm ridge #eef;
+		width: 15rem;
+		font-size: large;
+		text-align: justify;
+
+		position: relative;
+		translate: 50% 50%;
+	}
+
 	.status {
 		margin-top: 0;
 		color: #a00;
@@ -32,7 +68,7 @@
 		color: #112;
 	}
 
-	.icon-button{
+	.icon-button {
 		width: fit-content;
 		height: fit-content;
 		border-radius: 25px;
@@ -47,23 +83,11 @@
 		padding-right: 1rem;
 	}
 
-	.frame {
-		background-color: #667;
-		border-radius: 2rem;
-		padding: 1rem;
-		border: 2mm ridge #eef;
-		width: 15rem;
-		font-size: large;
-		text-align: justify;
-
-		position: absolute;
-		translate: -50% -50%;
-	}
-
-	.move-handle{
+	.move-handle {
 		width: 100%;
 		margin-bottom: 0.75rem;
 		height: 35px;
 		border-radius: 17.5px;
+		cursor :move;
 	}
 </style>
