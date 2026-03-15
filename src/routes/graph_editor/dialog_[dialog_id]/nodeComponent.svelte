@@ -8,8 +8,8 @@
 	let x = $derived(node.x);
 	let y = $derived(node.y);
 
-	function moveTo(new_x : number, new_y : number){
-
+	function constrained(new_x : number, new_y : number) : [number,number]
+	{
 		//check if inside
 		const canvas = document.getElementById("questsEdgeCanvas")!
 		const canvasRect = canvas.getBoundingClientRect()
@@ -25,11 +25,14 @@
 		new_x = Math.max(left,  Math.min(new_x, right));
 		new_y = Math.max(top,   Math.min(new_y, bottom));
 
-		x = new_x
-		y = new_y
-		node.x = new_x
-		node.y = new_y
-		node.onMoved.emit([new_x,new_y])
+		return [new_x,new_y]
+	}
+
+	function moveTo(new_x : number, new_y : number){
+		[x,y] = constrained(new_x,new_y)
+		node.x = x
+		node.y = y
+		node.onMoved.emit([x,y])
 	}
 
 	function moveDialog(event: MouseEvent) {
