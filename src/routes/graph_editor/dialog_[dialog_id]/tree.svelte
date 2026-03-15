@@ -1,5 +1,5 @@
 <script lang="ts">
-import Node from "./node.svelte";
+	import NodeComponent from "./nodeComponent.svelte";
     let {dialog, width, height} = $props();
 
 </script>
@@ -12,7 +12,7 @@ import Node from "./node.svelte";
 
 <div class="background" style="width: {width}px; height:{height}px;">
     {#each dialog.nodes as node (node.id)}
-        <Node {node}/>
+        <NodeComponent {node}/>
     {/each}
 
 </div>
