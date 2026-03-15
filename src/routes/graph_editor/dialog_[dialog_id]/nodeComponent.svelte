@@ -1,42 +1,43 @@
 <script lang="ts">
+	import '../../../main.css';
+
 	import Icon from '@iconify/svelte';
 	import LineInput from './lineInput.svelte';
 	import type { DialogNode } from './classes';
 
-	const { node } : {node: DialogNode} = $props();
+	const { node }: { node: DialogNode } = $props();
 
 	let x = $derived(node.x);
 	let y = $derived(node.y);
 
-	function constrained(new_x : number, new_y : number) : [number,number]
-	{
+	function constrained(new_x: number, new_y: number): [number, number] {
 		//check if inside
-		const canvas = document.getElementById("questsEdgeCanvas")!
-		const canvasRect = canvas.getBoundingClientRect()
+		const canvas = document.getElementById('questsEdgeCanvas')!;
+		const canvasRect = canvas.getBoundingClientRect();
 
-		const frame = document.getElementById("dialog-node-"+node.id)!
-		const frameRect = frame.getBoundingClientRect()
+		const frame = document.getElementById('dialog-node-' + node.id)!;
+		const frameRect = frame.getBoundingClientRect();
 
-		const left   = 0 + frameRect.width/2;
-		const right  = canvasRect.width - frameRect.width/2;
-		const top    = 0 + frameRect.height/2;
-		const bottom = canvasRect.height - frameRect.height/2;
+		const left = 0 + frameRect.width / 2;
+		const right = canvasRect.width - frameRect.width / 2;
+		const top = 0 + frameRect.height / 2;
+		const bottom = canvasRect.height - frameRect.height / 2;
 
-		new_x = Math.max(left,  Math.min(new_x, right));
-		new_y = Math.max(top,   Math.min(new_y, bottom));
+		new_x = Math.max(left, Math.min(new_x, right));
+		new_y = Math.max(top, Math.min(new_y, bottom));
 
-		return [new_x,new_y]
+		return [new_x, new_y];
 	}
 
-	function moveTo(new_x : number, new_y : number){
-		[x,y] = constrained(new_x,new_y)
-		node.x = x
-		node.y = y
-		node.onMoved.emit([x,y])
+	function moveTo(new_x: number, new_y: number) {
+		[x, y] = constrained(new_x, new_y);
+		node.x = x;
+		node.y = y;
+		node.onMoved.emit([x, y]);
 	}
 
 	function moveDialog(event: MouseEvent) {
-		moveTo(x+ event.movementX,y+event.movementY)
+		moveTo(x + event.movementX, y + event.movementY);
 	}
 
 	function startDragging() {
@@ -49,7 +50,7 @@
 	}
 
 	function edit() {
-		moveTo(0,0)
+		moveTo(0, 0);
 	}
 </script>
 
@@ -58,11 +59,15 @@
 		<Icon icon="si:move-duotone" color="text" width="30" height="30" />
 	</button>
 
+	<button class="plug top-center">
+		<Icon icon="ci:link-vertical" width="30" height="30"></Icon>
+	</button>
+
 	<p class="status"><bold>NPC line</bold></p>
 	<p class="text">
-	{#each node.lines as line, i (i)}
-		<LineInput {line}/>
-	{/each}
+		{#each node.lines as line, i (i)}
+			<LineInput {line} />
+		{/each}
 	</p>
 	<span class="actions">
 		<button class="icon-button">
@@ -78,21 +83,18 @@
 		</button>
 	</span>
 
-	<button class="icon-button bottom-center">
-		<Icon icon="ci:link-vertical" width="40" height="40"></Icon>
+	<button class="plug bottom-center">
+		<Icon icon="ci:link-vertical" width="30" height="30"></Icon>
 	</button>
 </div>
 
 <style>
 	.frame {
-		background-color: #667;
-		border-radius: 2rem;
+		background-color: var(--node-color);
 		padding: 1rem;
-		border: 2mm ridge #eef;
 		width: 15rem;
 		font-size: large;
 		text-align: justify;
-
 		position: absolute;
 		translate: -50% -50%;
 	}
@@ -111,15 +113,30 @@
 		height: fit-content;
 		border-radius: 50px;
 	}
-	.higher{
+	.higher {
 		position: relative;
 		bottom: 8px;
 	}
 	.bottom-center {
-		position: absolute;
 		left: 50%;
 		bottom: 0;
-		transform: translate(-50%, 50%);
+		transform: translate(-50%, 100%);
+		border-radius: 0 0 50px 50px;
+	}
+	.plug {
+		position: absolute;
+		width: 100px;
+		background-color: var(--node-color);
+		border: none;
+	}
+	.plug:hover {
+		background-color: var(--edge-color);
+	}
+	.top-center {
+		left: 50%;
+		top: 0;
+		transform: translate(-50%, -100%);
+		border-radius: 50px 50px 0 0;
 	}
 
 	.actions {

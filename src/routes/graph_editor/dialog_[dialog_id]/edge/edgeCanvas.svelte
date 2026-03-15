@@ -46,6 +46,5 @@
 <style>
 	.canvas {
 		border: 1px dashed gray;
-		border-radius: 50px;
 	}
 </style>

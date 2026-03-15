@@ -52,7 +52,6 @@
 
 <div class="container">
 
-
 	<h1>Editing dialog : {page.params.dialog_id}</h1>
 	<div class="graph">
 		<Tree {dialog} width={dialog_width} height={dialog_height}></Tree>

@@ -11,6 +11,7 @@
 <style>
     .background{
         position: relative;
+        background-color: beige;
     }
 </style>
 

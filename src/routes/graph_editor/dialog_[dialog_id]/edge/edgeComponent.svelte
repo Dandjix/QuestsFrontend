@@ -1,4 +1,5 @@
 <script lang="ts">
+    import '../../../../main.css'
 	import { onMount } from "svelte";
     import { DialogEdge } from "./classes";
 
@@ -32,10 +33,8 @@
 
 <style>
 	.frame {
-		background-color: rgb(102, 102, 182);
-		border-radius: 2rem;
+		background-color: var(--edge-color);
 		padding: 1rem;
-		border: 2mm ridge rgb(229, 215, 255);
 		width: 15rem;
 		font-size: large;
 		text-align: justify;
