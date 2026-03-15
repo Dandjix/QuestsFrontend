@@ -8,10 +8,16 @@
 	let x = $derived(node.x);
 	let y = $derived(node.y);
 
+	function moveTo(new_x : number, new_y : number){
+		x = new_x
+		y = new_y
+		node.x = new_x
+		node.y = new_y
+		node.onMoved.emit([new_x,new_y])
+	}
+
 	function moveDialog(event: MouseEvent) {
-		x += event.movementX;
-		y += event.movementY;
-		console.log('set node x and y to : ', node.x, node.y);
+		moveTo(x+ event.movementX,y+event.movementY)
 	}
 
 	function startDragging() {
@@ -24,12 +30,11 @@
 	}
 
 	function edit() {
-		node.x = 0;
-		node.y = 0;
+		moveTo(0,0)
 	}
 </script>
 
-<div class="frame" style="left: calc(50% + {x}px); top: calc(50% + {y}px);">
+<div class="frame" style="left: {x}px; top: {y}px;">
 	<button class="move-handle" onmousedown={startDragging} onmouseup={stopDragging}>
 		<Icon icon="si:move-duotone" color="text" width="30" height="30" />
 	</button>
@@ -69,8 +74,8 @@
 		font-size: large;
 		text-align: justify;
 
-		position: relative;
-		translate: 50% 50%;
+		position: absolute;
+		translate: -50% -50%;
 	}
 
 	.status {

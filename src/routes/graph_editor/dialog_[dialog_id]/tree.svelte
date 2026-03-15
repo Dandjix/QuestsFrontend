@@ -1,20 +1,31 @@
 <script lang="ts">
 	import type { Dialog } from "./classes";
-	import EdgeTracer from "./edge/edgeTracer.svelte";
+	import EdgeCanvas from "./edge/edgeCanvas.svelte";
 	import NodeComponent from "./nodeComponent.svelte";
-    let {dialog, width, height}:{dialog:Dialog,width:number,height:number} = $props();
+
+    const {dialog, width, height}:{dialog:Dialog,width:number,height:number} = $props();
 
 </script>
 
 <style>
     .background{
+        background-color: aqua;
+        position: relative;
+    }
+    .test{
+        background-color: blue;
+        position:absolute;
+        top: 0;
+        left: 0;
     }
 </style>
 
 <div class="background" style="width: {width}px; height:{height}px;">
-    <EdgeTracer edges={dialog.edges}/>
+    <EdgeCanvas {dialog}/>
+    <div class="test">tester</div>
+
     {#each dialog.nodes as node (node.id)}
-        <NodeComponent {node}/>
+    <NodeComponent {node}/>
     {/each}
 
 </div>
