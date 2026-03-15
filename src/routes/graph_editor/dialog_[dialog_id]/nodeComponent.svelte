@@ -9,6 +9,22 @@
 	let y = $derived(node.y);
 
 	function moveTo(new_x : number, new_y : number){
+
+		//check if inside
+		const canvas = document.getElementById("questsEdgeCanvas")!
+		const canvasRect = canvas.getBoundingClientRect()
+
+		const frame = document.getElementById("dialog-node-"+node.id)!
+		const frameRect = frame.getBoundingClientRect()
+
+		const left   = 0 + frameRect.width/2;
+		const right  = canvasRect.width - frameRect.width/2;
+		const top    = 0 + frameRect.height/2;
+		const bottom = canvasRect.height - frameRect.height/2;
+
+		new_x = Math.max(left,  Math.min(new_x, right));
+		new_y = Math.max(top,   Math.min(new_y, bottom));
+
 		x = new_x
 		y = new_y
 		node.x = new_x

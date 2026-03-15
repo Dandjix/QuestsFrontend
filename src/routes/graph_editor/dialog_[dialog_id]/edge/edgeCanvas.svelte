@@ -12,6 +12,7 @@
 
 		context.lineWidth = 7;
 		context.strokeStyle = '#444';
+		context.lineCap = "round"
 
 		//clear canvas
 		context.clearRect(0, 0, canvas.width, canvas.height);
