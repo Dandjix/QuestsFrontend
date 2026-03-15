@@ -4,8 +4,8 @@
 
 	const { node } = $props();
 
-	let x = $state(node.x);
-	let y = $state(node.y);
+	let x = $derived(node.x);
+	let y = $derived(node.y);
 
 	function moveDialog(event: MouseEvent) {
 		x += event.movementX;

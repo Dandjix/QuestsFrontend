@@ -15,8 +15,8 @@
 			new NPCLine("may I help you ?"),
 			new NPCLine("you deaf or what ?"),
 		],5,10,1),
-		new DialogNode([new NPCLine("goobye")],5,100,2)]
-		// []
+		new DialogNode([new NPCLine("goobye")],5,100,2)],
+		[]
 	);
 </script>
 

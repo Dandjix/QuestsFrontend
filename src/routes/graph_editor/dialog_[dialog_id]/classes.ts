@@ -1,3 +1,5 @@
+import type { DialogEdge } from './edge/classes';
+
 class NPCLine {
 	text: string;
 
@@ -31,34 +33,17 @@ class DialogNode {
 	}
 }
 
-class DialogEdge {
-	from: DialogNode;
-	to: DialogNode;
-	line: PlayerLine;
-	/**
-	 *
-	 */
-	constructor(line: PlayerLine, from: DialogNode, to: DialogNode) {
-		this.line = line;
-		this.from = from;
-		this.to = to;
-	}
-}
-
 class Dialog {
 	nodes: DialogNode[];
-	// edges : Edge[]
+	edges: DialogEdge[];
 
 	/**
 	 *
 	 */
-	constructor(
-		nodes: DialogNode[]
-		//  edges : Edge[]
-	) {
+	constructor(nodes: DialogNode[], edges: DialogEdge[]) {
 		this.nodes = nodes;
-		// this.edges = edges
+		this.edges = edges;
 	}
 }
 
-export { NPCLine, PlayerLine, DialogNode, DialogEdge, Dialog };
+export { NPCLine, PlayerLine, DialogNode, Dialog };
