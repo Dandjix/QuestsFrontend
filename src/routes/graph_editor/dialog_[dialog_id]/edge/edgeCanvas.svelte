@@ -8,11 +8,6 @@
 		const canvas = document.getElementById("questsEdgeCanvas") as HTMLCanvasElement
 		const context = canvas.getContext("2d")!
 
-		const rect = canvas.getBoundingClientRect();
-
-		// Scale ratio between canvas internal resolution and CSS display size
-		const scaleX = canvas.width / rect.width;
-		const scaleY = canvas.height / rect.height;
 
 		//clear canvas
 		context.clearRect(0, 0, canvas.width, canvas.height);
@@ -21,10 +16,10 @@
 		dialog.edges.forEach((edge) =>{
 
 
-			const fromX = (edge.from.x ) / scaleX;
-			const fromY = (edge.from.y ) / scaleY;
-			const toX = (edge.to.x ) / scaleX;
-			const toY = (edge.to.y ) / scaleY;
+			const fromX = (edge.from.x ) 
+			const fromY = (edge.from.y ) 
+			const toX = (edge.to.x ) 
+			const toY = (edge.to.y ) 
 
 			context.moveTo(fromX, fromY);
 			context.lineTo(toX, toY);

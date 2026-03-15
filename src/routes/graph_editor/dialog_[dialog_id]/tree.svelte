@@ -22,7 +22,6 @@
 
 <div class="background" style="width: {width}px; height:{height}px;">
     <EdgeCanvas {dialog}/>
-    <div class="test">tester</div>
 
     {#each dialog.nodes as node (node.id)}
     <NodeComponent {node}/>
