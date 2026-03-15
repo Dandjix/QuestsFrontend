@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Dialog } from "./classes";
 	import EdgeCanvas from "./edge/edgeCanvas.svelte";
+	import EdgeComponent from "./edge/edgeComponent.svelte";
 	import NodeComponent from "./nodeComponent.svelte";
 
     const {dialog, width, height}:{dialog:Dialog,width:number,height:number} = $props();
@@ -18,6 +19,10 @@
 
     {#each dialog.nodes as node (node.id)}
     <NodeComponent {node}/>
+    {/each}
+
+    {#each dialog.edges as edge, i (i)}
+    <EdgeComponent {edge}/>
     {/each}
 
 </div>
