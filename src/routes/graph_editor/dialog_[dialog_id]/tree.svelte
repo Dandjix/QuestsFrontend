@@ -9,13 +9,12 @@
 
 <style>
     .background{
-        background-color: aqua;
         position: relative;
     }
 </style>
 
 <div class="background" style="width: {width}px; height:{height}px;">
-    <EdgeCanvas {dialog}/>
+    <EdgeCanvas {dialog} {width} {height}/>
 
     {#each dialog.nodes as node (node.id)}
     <NodeComponent {node}/>

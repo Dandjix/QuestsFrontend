@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import type { Dialog } from '../classes';
 
-	const { dialog }: { dialog : Dialog } = $props();
+	const { dialog ,width, height }: { dialog : Dialog, width : number, height : number } = $props();
 
 	const drawEdges = ()=>{
 		const canvas = document.getElementById("questsEdgeCanvas") as HTMLCanvasElement
@@ -31,6 +31,7 @@
 
 	}
 
+	// svelte-ignore state_referenced_locally
 	dialog.onNodeMoved.subscribe(drawEdges)
 
 	onMount(()=>{
@@ -40,11 +41,11 @@
 
 <style>
 	.canvas{
-		border: 1px solid black;
-		z-index: -1000;
+		border: 1px dashed gray;
+		border-radius: 50px;
 	}
 </style>
 
 
 
-<canvas width="1000" height="1000" id="questsEdgeCanvas" class="canvas"></canvas>
+<canvas width={width} height={height} id="questsEdgeCanvas" class="canvas"></canvas>
