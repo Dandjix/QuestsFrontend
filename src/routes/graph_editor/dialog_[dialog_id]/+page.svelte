@@ -11,10 +11,10 @@
 	const dialog_height = 4000;
 
 	const lines = [
-		new DialogNode([new NPCLine('1')], dialog_width / 2, 50, 1),
-		new DialogNode([new NPCLine('2')], dialog_width / 2, 125, 2),
-		new DialogNode([new NPCLine('3')], dialog_width / 2 + 450, 200, 3),
-		new DialogNode([new NPCLine('4')], dialog_width / 2 - 450, 200, 4),
+		new DialogNode([new NPCLine('1')], dialog_width / 2 - 300, 100, 1),
+		new DialogNode([new NPCLine('2')], dialog_width / 2, 400, 2),
+		new DialogNode([new NPCLine('3')], dialog_width / 2 + 450, 700, 3),
+		new DialogNode([new NPCLine('4')], dialog_width / 2 - 450, 1000, 4),
 		new DialogNode(
 			[
 				new NPCLine('hullo'),
@@ -33,7 +33,6 @@
 		new DialogEdge(new PlayerLine('Buzz off'), lines[0], lines[1]),
 		new DialogEdge(new PlayerLine('Buzz off'), lines[1], lines[2]),
 		new DialogEdge(new PlayerLine('Buzz off'), lines[2], lines[3]),
-		new DialogEdge(new PlayerLine('Buzz off'), lines[3], lines[4])
 	]);
 </script>
 

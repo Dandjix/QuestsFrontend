@@ -2,48 +2,49 @@
 	import { onMount } from 'svelte';
 	import type { Dialog } from '../classes';
 
-	const { dialog ,width, height }: { dialog : Dialog, width : number, height : number } = $props();
+	const { dialog, width, height }: { dialog: Dialog; width: number; height: number } = $props();
 
-	const drawEdges = ()=>{
-		const canvas = document.getElementById("questsEdgeCanvas") as HTMLCanvasElement
-		const context = canvas.getContext("2d")!
+	const drawEdges = () => {
+		const canvas = document.getElementById('questsEdgeCanvas') as HTMLCanvasElement;
+		const context = canvas.getContext('2d')!;
 
-		context.lineWidth = 7
-		context.strokeStyle = "#444"
+		const bezier_strength = 75
+
+		context.lineWidth = 7;
+		context.strokeStyle = '#444';
 
 		//clear canvas
 		context.clearRect(0, 0, canvas.width, canvas.height);
 
-		context.beginPath()
-		dialog.edges.forEach((edge) =>{
-
-
-			const [fromX, fromY] = edge.from.getBottomOutput()
-			const [toX,toY] = edge.to.getTopInput()
+		context.beginPath();
+		dialog.edges.forEach((edge) => {
+			const [fromX, fromY] = edge.from.getBottomOutput();
+			const [toX, toY] = edge.to.getTopInput();
 
 			context.moveTo(fromX, fromY);
-			context.lineTo(toX, toY);
-		})
-		context.closePath();
-		context.stroke();
+			//bezier shenanigans
 
-	}
+			context.bezierCurveTo(
+				fromX,fromY + bezier_strength,
+				toX,toY - bezier_strength,
+				toX, toY);
+		});
+		context.stroke();
+	};
 
 	// svelte-ignore state_referenced_locally
-	dialog.onNodeMoved.subscribe(drawEdges)
+	dialog.onNodeMoved.subscribe(drawEdges);
 
-	onMount(()=>{
-		drawEdges()
-	})
+	onMount(() => {
+		drawEdges();
+	});
 </script>
 
+<canvas {width} {height} id="questsEdgeCanvas" class="canvas"></canvas>
+
 <style>
-	.canvas{
+	.canvas {
 		border: 1px dashed gray;
 		border-radius: 50px;
 	}
 </style>
-
-
-
-<canvas width={width} height={height} id="questsEdgeCanvas" class="canvas"></canvas>
