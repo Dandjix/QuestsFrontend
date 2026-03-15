@@ -8,7 +8,7 @@
 
 
 
-	let dialog = new Dialog(
+	let dialog : Dialog = new Dialog(
 		[new DialogNode([
 			new NPCLine("hullo"),
 			new NPCLine("how are you ?"),

@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 	import LineInput from './lineInput.svelte';
+	import type { DialogNode } from './classes';
 
-	const { node } = $props();
+	const { node } : {node: DialogNode} = $props();
 
 	let x = $derived(node.x);
 	let y = $derived(node.y);
