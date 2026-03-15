@@ -34,7 +34,7 @@
 	}
 </script>
 
-<div class="frame" style="left: {x}px; top: {y}px;">
+<div class="frame" style="left: {x}px; top: {y}px;" id="dialog-node-{node.id}">
 	<button class="move-handle" onmousedown={startDragging} onmouseup={stopDragging}>
 		<Icon icon="si:move-duotone" color="text" width="30" height="30" />
 	</button>

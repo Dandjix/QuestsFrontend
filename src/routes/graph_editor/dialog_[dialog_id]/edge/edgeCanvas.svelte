@@ -18,10 +18,8 @@
 		dialog.edges.forEach((edge) =>{
 
 
-			const fromX = (edge.from.x ) 
-			const fromY = (edge.from.y ) 
-			const toX = (edge.to.x ) 
-			const toY = (edge.to.y ) 
+			const [fromX, fromY] = edge.from.getBottomOutput()
+			const [toX,toY] = edge.to.getTopInput()
 
 			context.moveTo(fromX, fromY);
 			context.lineTo(toX, toY);

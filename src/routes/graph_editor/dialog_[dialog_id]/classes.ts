@@ -27,6 +27,20 @@ class DialogNode {
 	 */
 	onMoved: QuestsEvent<[number,number]>
 
+	getTopInput() : [number,number]
+	{
+		const element = document.getElementById("dialog-node-"+this.id)!
+		const rect = element.getBoundingClientRect()
+		return [this.x,this.y - rect.height/2]
+	}
+
+	getBottomOutput() : [number,number]
+	{
+		const element = document.getElementById("dialog-node-"+this.id)!
+		const rect = element.getBoundingClientRect()
+		return [this.x,this.y + rect.height/2]
+	}
+
 	/**
 	 *
 	 */
