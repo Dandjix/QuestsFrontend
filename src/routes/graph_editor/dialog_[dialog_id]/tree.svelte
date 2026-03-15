@@ -12,12 +12,6 @@
         background-color: aqua;
         position: relative;
     }
-    .test{
-        background-color: blue;
-        position:absolute;
-        top: 0;
-        left: 0;
-    }
 </style>
 
 <div class="background" style="width: {width}px; height:{height}px;">
