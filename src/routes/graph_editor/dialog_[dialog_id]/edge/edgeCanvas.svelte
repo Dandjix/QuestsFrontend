@@ -8,6 +8,8 @@
 		const canvas = document.getElementById("questsEdgeCanvas") as HTMLCanvasElement
 		const context = canvas.getContext("2d")!
 
+		context.lineWidth = 7
+		context.strokeStyle = "#444"
 
 		//clear canvas
 		context.clearRect(0, 0, canvas.width, canvas.height);
