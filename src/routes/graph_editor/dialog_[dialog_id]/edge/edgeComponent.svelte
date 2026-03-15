@@ -47,5 +47,5 @@
 
 <div class="frame" style="left:{x}px; top:{y}px;">
 	<p>Player line</p>
-	<p>{edge.line.text}</p>
+	<input value={edge.line.text}>
 </div>
