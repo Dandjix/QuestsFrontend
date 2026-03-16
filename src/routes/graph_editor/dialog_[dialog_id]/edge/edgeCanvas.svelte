@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import type { Dialog } from '../classes.svelte';
 
 	const { dialog, width, height }: { dialog: Dialog; width: number; height: number } = $props();
