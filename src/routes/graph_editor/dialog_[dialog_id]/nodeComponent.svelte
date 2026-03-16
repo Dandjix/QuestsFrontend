@@ -3,12 +3,9 @@
 
 	import Icon from '@iconify/svelte';
 	import LineInput from './lineInput.svelte';
-	import type { DialogNode } from './classes';
+	import type { DialogNode } from './classes.svelte';
 
 	const { node }: { node: DialogNode } = $props();
-
-	let x = $derived(node.x);
-	let y = $derived(node.y);
 
 	function constrained(new_x: number, new_y: number): [number, number] {
 		//check if inside
@@ -30,14 +27,11 @@
 	}
 
 	function moveTo(new_x: number, new_y: number) {
-		[x, y] = constrained(new_x, new_y);
-		node.x = x;
-		node.y = y;
-		node.onMoved.emit([x, y]);
+		[node.x, node.y] = constrained(new_x, new_y);
 	}
 
 	function moveDialog(event: MouseEvent) {
-		moveTo(x + event.movementX, y + event.movementY);
+		moveTo(node.x + event.movementX, node.y + event.movementY);
 	}
 
 	function startDragging() {
@@ -54,7 +48,7 @@
 	}
 </script>
 
-<div class="frame" style="left: {x}px; top: {y}px;" id="dialog-node-{node.id}">
+<div class="frame" style="left: {node.x}px; top: {node.y}px;" id="dialog-node-{node.id}">
 	<button class="move-handle" onmousedown={startDragging} onmouseup={stopDragging}>
 		<Icon icon="si:move-duotone" color="text" width="30" height="30" />
 	</button>

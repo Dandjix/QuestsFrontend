@@ -4,7 +4,7 @@
 
 	// import NodeComponent from "./nodeComponent.svelte"
 
-	import { NPCLine, DialogNode, Dialog, PlayerLine } from './classes.ts';
+	import { NPCLine, DialogNode, Dialog, PlayerLine } from './classes.svelte.ts';
 	import { DialogEdge } from './edge/classes.ts';
 
 	const dialog_width = 1920;

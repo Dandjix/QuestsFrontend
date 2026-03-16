@@ -1,4 +1,4 @@
-import { QuestsEvent } from '../../events';
+import { SvelteMap } from 'svelte/reactivity';
 import type { DialogEdge } from './edge/classes';
 
 class NPCLine {
@@ -22,10 +22,6 @@ class DialogNode {
 	x: number;
 	y: number;
 	id: number;
-	/**
-	 * the arguments are the new position of the node
-	 */
-	onMoved: QuestsEvent<[number,number]>
 
 	getTopInput() : [number,number]
 	{
@@ -45,11 +41,10 @@ class DialogNode {
 	 *
 	 */
 	constructor(lines: NPCLine[], x: number, y: number, id: number) {
-		this.lines = lines;
-		this.x = x;
-		this.y = y;
-		this.id = id;
-		this.onMoved = new QuestsEvent();
+		this.lines = $state(lines);
+		this.x = $state(x);
+		this.y = $state(y);
+		this.id = $state(id);
 	}
 }
 
@@ -59,30 +54,16 @@ class Dialog {
 	/**
 	 * argument is the node that has been moved
 	 */
-	onNodeMoved = new QuestsEvent<DialogNode>()
-	private _nodeHandlers = new Map<DialogNode, () => void>();
+	private _nodeHandlers = new SvelteMap<DialogNode, () => void>();
 
 	addNode(node : DialogNode){
-		this.nodes.push(node)
-		const func = () => {
-			this.onNodeMoved.emit(node)
-		}
-		this._nodeHandlers.set(node,func)
-		node.onMoved.subscribe(func)
+		this.nodes.push(node) 
 	}
 
 	removeNode(node : DialogNode){ 
 		const index : number = this.nodes.indexOf(node)
 		if(index >= 0){
 			this.nodes.splice(index,1)
-			const func = this._nodeHandlers.get(node)
-			if (func){
-				node.onMoved.unsubscribe(func)
-				this._nodeHandlers.delete(node)
-			}
-			else{
-				console.warn("Node was removed which was not registered in nodeHandlers (most likely it was not added with addNode)")
-			}
 		}
 	}
 

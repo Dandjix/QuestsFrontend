@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Dialog } from "./classes";
+	import type { Dialog } from "./classes.svelte";
 	import EdgeCanvas from "./edge/edgeCanvas.svelte";
 	import EdgeComponent from "./edge/edgeComponent.svelte";
 	import NodeComponent from "./nodeComponent.svelte";

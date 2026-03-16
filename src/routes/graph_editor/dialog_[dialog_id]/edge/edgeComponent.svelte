@@ -1,6 +1,5 @@
 <script lang="ts">
     import '../../../../main.css'
-	import { onMount } from "svelte";
     import { DialogEdge } from "./classes";
 
     const {edge} : {edge : DialogEdge} = $props()
@@ -9,7 +8,7 @@
     let y : number = $state(0)
 
 
-    const onMoved = () => {
+    $effect(()=>{
         const [fromX,fromY] = edge.from.getBottomOutput()
         const [toX,toY] = edge.to.getTopInput()
 
@@ -19,14 +18,6 @@
         x = newX
         y = newY
 
-        console.log("edge moved");
-    };  
-
-    edge.from.onMoved.subscribe(onMoved)
-    edge.to.onMoved.subscribe(onMoved)
-
-    onMount(()=>{
-        onMoved()
     })
 
 </script>

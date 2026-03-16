@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import type { Dialog } from '../classes';
+	import type { Dialog } from '../classes.svelte';
 
 	const { dialog, width, height }: { dialog: Dialog; width: number; height: number } = $props();
 
-	const drawEdges = () => {
+	$effect(() => {
 		const canvas = document.getElementById('questsEdgeCanvas') as HTMLCanvasElement;
 		const context = canvas.getContext('2d')!;
 
@@ -31,13 +30,7 @@
 				toX, toY);
 		});
 		context.stroke();
-	};
 
-	// svelte-ignore state_referenced_locally
-	dialog.onNodeMoved.subscribe(drawEdges);
-
-	onMount(() => {
-		drawEdges();
 	});
 </script>
 

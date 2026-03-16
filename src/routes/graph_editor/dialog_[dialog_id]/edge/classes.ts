@@ -1,4 +1,4 @@
-import type { DialogNode, PlayerLine } from "../classes";
+import type { DialogNode, PlayerLine } from "../classes.svelte";
 
 class DialogEdge {
     from: DialogNode;
