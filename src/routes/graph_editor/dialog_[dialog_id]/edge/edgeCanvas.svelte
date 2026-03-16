@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import type { Dialog } from '../classes.svelte';
 
 	const { dialog, width, height }: { dialog: Dialog; width: number; height: number } = $props();
 
-	$effect(() => {
+	const drawEdges = () =>{
 		const canvas = document.getElementById('questsEdgeCanvas') as HTMLCanvasElement;
 		const context = canvas.getContext('2d')!;
 
@@ -30,7 +31,10 @@
 				toX, toY);
 		});
 		context.stroke();
+	}
 
+	$effect(() => {
+		drawEdges()
 	});
 </script>
 
