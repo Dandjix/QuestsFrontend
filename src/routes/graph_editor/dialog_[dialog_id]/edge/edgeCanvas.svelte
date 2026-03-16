@@ -16,8 +16,8 @@
 		//clear canvas
 		context.clearRect(0, 0, canvas.width, canvas.height);
 
-		context.beginPath();
 		dialog.edges.forEach((edge) => {
+			context.beginPath()
 			const [fromX, fromY] = edge.from.getBottomOutput();
 			const [toX, toY] = edge.to.getTopInput();
 
@@ -28,8 +28,8 @@
 				fromX,fromY + bezier_strength,
 				toX,toY - bezier_strength,
 				toX, toY);
+			context.stroke();
 		});
-		context.stroke();
 	}
 
 	$effect(() => {
